@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title>TODOS</title>
+</head>
+<body>
+
+    <form method="POST" action="/tasks" data-th-object="${task}">
+        <table> 
+            <tr>
+                <td>Task name: </td>
+                <td>
+                    <input type="text" data-th-field="*{name}">
+                    <div data-th-if="${#fields.hasErrors('name')}"
+                         data-th-errors="*{name}" data-th-errorclass="error">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Priority: </td>
+                <td>
+                    <select data-th-field="*{priority}">
+                        <option value="LOW">LOW</option>
+                        <option value="MEDIUM">MED</option>
+                        <option value="HIGH">HIGH</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Complete by: </td>
+                <td>
+                    <input type="date" data-th-field="*{deadline}">
+                    <div data-th-if="${#fields.hasErrors('deadline')}"
+                            data-th-errors="*{deadline}" data-th-errorclass="error">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <button type="submit">ADD</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <h2>Looks like you are free!</h2>
+    
+</body>
+</html>
