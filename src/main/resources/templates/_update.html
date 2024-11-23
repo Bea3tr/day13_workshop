@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title>TODOS</title>
+</head>
+<body>
+
+    <form method="POST" action="/tasks/noHttp" data-th-object="${task}">
+        <table> 
+            <tr>
+                <td>Task name: </td>
+                <td>
+                    <input type="text" data-th-field="*{name}">
+                </td>
+            </tr>
+            <tr>
+                <td>Priority: </td>
+                <td>
+                    <select data-th-field="*{priority}">
+                        <option value="low">LOW</option>
+                        <option value="medium">MED</option>
+                        <option value="high">HIGH</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Complete by: </td>
+                <td>
+                    <input type="date" data-th-field="*{deadline}">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="hidden" name="list" data-th-value="${hiddenList}"></hidden>
+                </td>
+                <td>
+                    <button type="submit">ADD</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+    
+    <table>
+        <thead>
+            <tr>
+                <th class="todos">Task</th>
+                <th class="todos">Priority</th>
+                <th class="todos">Complete by</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr data-th-each="t: ${taskList}">
+                <td class="todos" data-th-text="${t.name}"></td>
+                <td class="todos" data-th-text="${t.priority}"></td>
+                <td class="todos" data-th-text="${#dates.format(t.deadline, 'dd/MM/yyyy')}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <form method="POST" action="/exit">
+        <table>
+            <tr>
+                <td>
+                    <button class="save" type="submit">SAVE</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+    
+</body>
+</html>

@@ -1,5 +1,7 @@
 package ssf.day13_workshop.models;
 
+import java.util.logging.Logger;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,12 +11,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(path={"/", "index.html"})
 public class IndexController {
 
+    private final Logger logger = Logger.getLogger(IndexController.class.getName());
+
     @GetMapping
     public String getIndex(Model model) {
 
-        model.addAttribute("task", new Task());
+        logger.info("New session started");
 
-        return "index";
+        model.addAttribute("task", new Task());
+        model.addAttribute("hiddenList", "");
+
+        return "_index";
     }
     
 }
